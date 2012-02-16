@@ -119,8 +119,11 @@ class Client extends OAuthAppModel {
 			return false;
 		}
 
-		//$this->data['Client']['client_id'] = String::uuid();
-		$this->data['Client']['client_id'] = base64_encode(uniqid() . substr(uniqid(), 11, 2));
+		//You may wish to change this
+		$this->data['Client']['client_id'] = base64_encode(uniqid() . substr(uniqid(), 11, 2));	// e.g. NGYcZDRjODcxYzFkY2Rk (seems popular format)
+		//$this->data['Client']['client_id'] = uniqid();					// e.g. 4f3d4c8602346
+		//$this->data['Client']['client_id'] = str_replace('.', '', uniqid('', true));		// e.g. 4f3d4c860235a529118898
+		//$this->data['Client']['client_id'] = str_replace('-', '', String::uuid());		// e.g. 4f3d4c80cb204b6a8e580a006f97281a
 
 		$this->addClientSecret = OAuthComponent::hash(str_shuffle(String::uuid()));
 		$this->data['Client']['client_secret'] = $this->addClientSecret;
