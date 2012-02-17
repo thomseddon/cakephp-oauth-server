@@ -32,7 +32,6 @@ class OAuthController extends OAuthAppController {
  */
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->OAuth->allow('test');
 		$this->OAuth->authenticate = array('fields' => array('username' => 'email'));
 		$this->Security->blackHoleCallback = 'blackHole';
 	}
@@ -142,7 +141,6 @@ class OAuthController extends OAuthAppController {
  */
 	public function token(){
 		$this->autoRender = false;
-		$this->Security->csrfCheck = false;
 		try {
 			$this->OAuth->grantAccessToken();
 		} catch (OAuth2ServerException $e) {
@@ -159,9 +157,9 @@ class OAuthController extends OAuthAppController {
  * 
  */
 	public function userinfo() {
-		$this->autoRender = false;
+		$this->layout = null;
 		$user = $this->OAuth->user();
-		echo json_encode($user);
+		$this->set(compact('user'));
 	}
 	
 /**
