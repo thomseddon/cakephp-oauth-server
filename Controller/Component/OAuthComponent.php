@@ -141,7 +141,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  */
 	public function __construct(ComponentCollection $collection, $settings = array()){
 		parent::__construct($collection, $settings);
-		$this->OAuth2 = new OAuth2(&$this);
+		$this->OAuth2 = new OAuth2($this);
 		$this->AccessToken = ClassRegistry::init(array('class' => 'OAuth.AccessToken', 'alias' => 'AccessToken'));
 		$this->AuthCode = ClassRegistry::init(array('class' => 'OAuth.AuthCode', 'alias' => 'AuthCode'));
 		$this->Client = ClassRegistry::init(array('class' => 'OAuth.Client', 'alias' => 'Client'));

@@ -70,7 +70,7 @@ class RefreshToken extends OAuthAppModel {
  * 
  * @return boolean 
  */
-	public function beforeSave() {
+	public function beforeSave($options = array()) {
 		$this->data['AccessToken']['refresh_token'] = OAuthComponent::hash($this->data['AccessToken']['refresh_token']);
 		return true;
 	}

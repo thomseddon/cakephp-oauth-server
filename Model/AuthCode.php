@@ -82,7 +82,7 @@ class AuthCode extends OAuthAppModel {
  * 
  * @return boolean 
  */
-	public function beforeSave() {
+	public function beforeSave($options = array()) {
 		$this->data['AuthCode']['code'] = OAuthComponent::hash($this->data['AuthCode']['code']);
 		return true;
 	}
