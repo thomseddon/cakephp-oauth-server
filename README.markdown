@@ -10,7 +10,7 @@ This is a plugin for implementing an OAuth Server/Provider in CakePHP, built on 
 * An example controller with authorize and token end points
 
 ## Requirements
-[CakePHP 2.0.x](http://cakephp.org/)
+[CakePHP 2.x](http://cakephp.org/)
 
 A clone of [oauth2-php][1] in your Vendors folder
 
