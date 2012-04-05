@@ -325,15 +325,14 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
 /**
  * Convenience function to invalidate all a users tokens, for example when they change their password
  * 
- * 
  * @param int $user_id
  * @param string $tokens 'both' (default) to remove both AccessTokens and RefreshTokens or remove just one type using 'access' or 'refresh'
  */
 	public function invalidateUserTokens($user_id, $tokens = 'both') {
-		if ($tokens == ('access' || 'both')) {
+		if ($tokens == 'access' || $tokens == 'both') {
 			$this->AccessToken->deleteAll(array('user_id' => $user_id), false);
 		}
-		if ($tokens == ('refresh' || 'both')) {
+		if ($tokens == 'refresh' || $tokens == 'both') {
 			$this->RefreshToken->deleteAll(array('user_id' => $user_id), false);
 		}
 	}
