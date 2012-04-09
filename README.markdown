@@ -22,6 +22,19 @@ Then clone this repo into a "OAuth" folder in your Plugins folder:
 ```
 $ git clone git://github.com/seddonmedia/cakephp-oauth-server.git Plugin/OAuth
 ```
+Or via submodule:
+
+```
+$ git submodule add git://github.com/seddonmedia/cakephp-oauth-server.git Plugin/OAuth
+```
+
+
+Load the plugin
+
+```
+CakePlugin::loadAll(); // Loads all plugins at once
+CakePlugin::load('OAuth'); //Just load OAuth
+```
 
 And include the component in your controller:
 
@@ -32,7 +45,7 @@ $components = array('OAuth.OAuth');
 
 ## Getting Started
 ### OAuth
-This plugin makes it easy to implement an OAuth2 provider/server. However, before you even think about using it you should make sure you are fully aware of how the OAuth "protocol" actually works. 
+**A good understanding of the OAuth protocol should be considered a prerequisite of using this plugin.**
 Good documentation explaining various OAuth2 flows is provided by [Google](https://developers.google.com/accounts/docs/OAuth2), [Facebook](http://developers.facebook.com/docs/authentication/) and [in the official spec](http://tools.ietf.org/html/draft-ietf-oauth-v2-23).
 For reference, this plugin currently supports the following grant types:
 
@@ -42,7 +55,7 @@ For reference, this plugin currently supports the following grant types:
 
 If you need any others please build them into the base [oauth2-php library][1] and let me know :)
 
-It should be noted that most methods support both GET and POST, so you can test your setup straight from the browser.
+It should be noted here that most OAuth methods support both GET and POST, so you can test your setup straight from the browser.
 
 ### Controller Setup
 To use the "Resource Owner Password Credentials Grant" you need to configure the plugin so it knows where to look for your users username/password combinations. By default it will try a "Users" model with "username" and "password" fields, you can change this in your controllers beforeFilter like so:
@@ -56,7 +69,7 @@ $this->OAuth->authenticate = array(
 );
 ```
 
-You can control what actions can be accessed using an OAuth access token in the same way you control access with the AuthComponent, so for eaxmple placing this in a controller's beforeFilter:
+You can control what actions can be accessed using an OAuth access token in the same way you control access with the AuthComponent, so for example placing this in a controller's beforeFilter:
 
 ```
 $this->OAuth->allow(array('userinfo', 'example'));
@@ -64,10 +77,10 @@ $this->OAuth->allow(array('userinfo', 'example'));
 Would allow access to the "userinfo" and "example" actions.
 
 ### Adding OAuth Clients
-A client is an application that can access resources on behalf of resource owner, i.e. someone who can use your API.
+An OAuth client is an application that can access resources on behalf of resource owner, i.e. someone who can use your API.
 
 This plugin ships with all required models, including the "Clients" model for adding and accessing OAuth clients.
-You may wish to add clients manually, see the tables.sql for the schema, or you can use the convenience method included in the model, like so:
+You may wish to handle adding clients yourself, see the tables.sql for the schema, or you can use the convenience method included in the model, like so:
 
 ```
 $client = $this->OAuth->Clients->add('http://www.return_url.com')
@@ -84,7 +97,7 @@ Array(
 
 The method includes various schemes for generating client id's, [pick your favourite](https://github.com/seddonmedia/cakephp-oauth-server/blob/master/Model/Client.php#L122).
 
-**NOTE:** This convenience will generate a random client secret _and hash it_ before storage, for security. It will make sure the actual client secret it returned when using the method, but the as it is stored hashed, it is not possible to ever retrieve the actual client secret that should be used. This means that if the client forgets it, a new client secret will have to be issued.
+**NOTE:** This convenience method will generate a random client secret __and hash it__ for security before storage. Although it will pass back the actual raw client secret when you first add a new client, it is not possible to ever determine this from the hash stored in the database. So if the client forgets their secret, [a new one will have to be issued](https://github.com/seddonmedia/cakephp-oauth-server/blob/master/Model/Client.php#L139).
 
 
 ### Included Endpoints
