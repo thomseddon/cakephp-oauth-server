@@ -70,7 +70,7 @@ This plugin ships with all required models, including the "Clients" model for ad
 You may wish to add clients manually, see the tables.sql for the schema, or you can use the convenience method included in the model, like so:
 
 ```
-$client = $this->OAuth->Clients->add('http://www.return_url.com')
+$client = $this->OAuth->Client->add('http://www.return_url.com')
 ```
 Which will generate then client_id and client_secret and return something like:
 
@@ -105,7 +105,7 @@ As an example, once you have registered a client, you could then use the Authori
 2. Swap code for access token
  * `/oauth/token?grant_type=authorization_code&code=from_above&client_id=xxxx&client_secret=xxxx`
 3. Use access token
- * `/oauth/userinfo?token=from_above`
+ * `/oauth/userinfo?access_token=from_above`
 
 
 There is quite a bit of documentation through the code, so dive in, get your hands dirty and submit any issues here!
