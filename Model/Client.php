@@ -127,9 +127,6 @@ class Client extends OAuthAppModel {
 
 		$this->addClientSecret = OAuthComponent::hash(str_shuffle(String::uuid()));
 		$this->data['Client']['client_secret'] = $this->addClientSecret;
-		
-		pr($this->data);
-		exit;
 
 		return $this->save($this->data);
 	}
