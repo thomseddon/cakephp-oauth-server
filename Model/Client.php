@@ -125,12 +125,29 @@ class Client extends OAuthAppModel {
 		//$this->data['Client']['client_id'] = str_replace('.', '', uniqid('', true));		// e.g. 4f3d4c860235a529118898
 		//$this->data['Client']['client_id'] = str_replace('-', '', String::uuid());		// e.g. 4f3d4c80cb204b6a8e580a006f97281a
 
-		$this->addClientSecret = OAuthComponent::hash(str_shuffle(String::uuid()));
+		$this->addClientSecret = $this->newClientSecret()
 		$this->data['Client']['client_secret'] = $this->addClientSecret;
 
 		return $this->save($this->data);
 	}
+
+/**
+ * Create a new, pretty (as in moderately, not beautiful - that can't be guaranteed ;-) random client secret
+ *
+ * @return string
+ */
+	public function newClientSecret() {
+		$length = 40;
+		$chars = '@#!%*+/-=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		$str = '';
+		$count = strlen($chars);
+		while ($length--) {
+			$str .= $chars[mt_rand(0, $count - 1)];
+		}
+		return OAuthComponent::hash($str);
+	}
 	
+
 	public function beforeSave($options = array()) {
 		$this->data['Client']['client_secret'] = OAuthComponent::hash($this->data['Client']['client_secret']);
 		return true;
