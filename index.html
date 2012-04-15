@@ -128,7 +128,7 @@ For reference, this plugin currently supports the following grant types:</p>
 <p>This plugin ships with all required models, including the "Clients" model for adding and accessing OAuth clients.
 You may wish to handle adding clients yourself, see the tables.sql for the schema, or you can use the convenience method included in the model, like so:</p>
 
-<pre><code>$client = $this-&gt;OAuth-&gt;Clients-&gt;add('<a href="http://www.return_url.com'">http://www.return_url.com'</a>)
+<pre><code>$client = $this-&gt;OAuth-&gt;Client-&gt;add('<a href="http://www.return_url.com'">http://www.return_url.com'</a>)
 </code></pre>
 
 <p>Which will generate then client_id and client_secret and return something like:</p>
@@ -172,7 +172,7 @@ You may wish to handle adding clients yourself, see the tables.sql for the schem
 <li>Use access token
 
 <ul>
-<li><code>/oauth/userinfo?token=from_above</code></li>
+<li><code>/oauth/userinfo?access_token=from_above</code></li>
 </ul>
 </li>
 </ol><p>There is quite a bit of documentation through the code, so dive in, get your hands dirty and submit any issues here!</p>
