@@ -12,7 +12,17 @@ This is a plugin for implementing an OAuth Server/Provider in CakePHP, built on 
 ## Requirements
 [CakePHP 2.x](http://cakephp.org/)
 
+
 A clone of [oauth2-php][1] in your Vendors folder
+### Cloning oauth2-php
+```
+$ git clone git://github.com/quizlet/oauth2-php.git Vendor/oauth2-php
+```
+Or via submodule:
+
+```
+$ git submodule add git://github.com/quizlet/oauth2-php.git Vendor/oauth2-php
+```
 
 ## Installation
 
