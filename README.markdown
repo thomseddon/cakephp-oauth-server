@@ -15,8 +15,21 @@ This is a plugin for implementing an OAuth Server/Provider in CakePHP, built on 
 A clone of [oauth2-php][1] in your Vendors folder
 
 ## Installation
-First grab the tables.sql and get your tables going.
 
+### Populate database
+First we need to populate the database with the right tables.
+
+Two ways: use schema.sql or Migrations using [Migrations Plugin from CakeDC][2]
+
+Go to Config/Schema/schema.sql to grab the tables
+
+**OR**
+
+```
+$ cake Migrations.migration all --plugin OAuth
+```
+
+### Cloning 
 Then clone this repo into a "OAuth" folder in your Plugins folder:
 
 ```
@@ -28,7 +41,7 @@ Or via submodule:
 $ git submodule add git://github.com/seddonmedia/cakephp-oauth-server.git Plugin/OAuth
 ```
 
-
+### Loading the Plugin
 Load the plugin
 
 ```PHP
@@ -36,6 +49,7 @@ CakePlugin::loadAll(); // Loads all plugins at once
 CakePlugin::load('OAuth'); //Just load OAuth
 ```
 
+### Include component in controller
 And include the component in your controller:
 
 ```PHP
@@ -125,3 +139,4 @@ There is quite a bit of documentation through the code, so dive in, get your han
 
 
 [1]: https://github.com/quizlet/oauth2-php
+[2]: https://github.com/CakeDC/migrations
