@@ -283,9 +283,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  * @return mixed array of user fields if $field is blank, string value if $field is set and $fields is avaliable, false on failure 
  */
 	public function user($field = null, $token = null) {
-		if ($this->_user) {
-			return $this->_user;
-		} else {
+		if (!$this->_user) {
 			$this->AccessToken->bindModel(array(
 			    'belongsTo' => array(
 				'User' => array(
