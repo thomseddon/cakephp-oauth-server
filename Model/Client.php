@@ -111,7 +111,7 @@ class Client extends OAuthAppModel {
 	public function add($data = null) {
 		$this->data['Client'] = array();
 
-		if (is_array($data['Client']) && array_key_exists('redirect_uri', $data['Client'])) {
+		if (is_array($data) && is_array($data['Client']) && array_key_exists('redirect_uri', $data['Client'])) {
 			$this->data['Client']['redirect_uri'] = $data['Client']['redirect_uri'];
 		} elseif (is_string($data)){
 			$this->data['Client']['redirect_uri'] = $data;
