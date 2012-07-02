@@ -39,8 +39,8 @@ class AuthCode extends OAuthAppModel {
 			),
 		),
 		'user_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			'notempty' => array(
+				'rule' => array('notempty'),
 			),
 		),
 		'redirect_uri' => array(

@@ -39,8 +39,8 @@ class RefreshToken extends OAuthAppModel {
 			),
 		),
 		'user_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			'notempty' => array(
+				'rule' => array('notempty'),
 			),
 		),
 		'expires' => array(
