@@ -149,6 +149,22 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
 	}
 
 /**
+ * Initializes OAuthComponent for use in the controller
+ *
+ * @param Controller $controller A reference to the instantiating controller object
+ * @return void
+ */
+	public function initialize(Controller $controller) {
+		$this->request = $controller->request;
+		$this->response = $controller->response;
+		$this->_methods = $controller->methods;
+
+		if (Configure::read('debug') > 0) {
+			Debugger::checkSecurityKeys();
+		}
+	}
+
+/**
  * Main engine that checks valid access_token and stores the associated user for retrival
  * 
  * @see AuthComponent::startup()
@@ -219,19 +235,15 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  * You can use allow with either an array, or var args.
  *
  * `$this->OAuth->allow(array('edit', 'add'));` or
- * `$this->OAuth->allow('edit', 'add');`
+ * `$this->OAuth->allow('edit', 'add');` or
  * `$this->OAuth->allow();` to allow all actions.
  *
- * allow() also supports '*' as a wildcard to mean all actions.
- *
- * `$this->OAuth->allow('*');`
- *
- * @param mixed $action,... Controller action name or array of actions
+ * @param string|array $action,... Controller action name or array of actions
  * @return void
  */
 	public function allow($action = null) {
 		$args = func_get_args();
-		if (empty($args) || $args == array('*')) {
+		if (empty($args) || $action === null) {
 			$this->allowedActions = $this->_methods;
 		} else {
 			if (isset($args[0]) && is_array($args[0])) {
@@ -250,13 +262,13 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  * `$this->OAuth->deny('edit', 'add');` or
  * `$this->OAuth->deny();` to remove all items from the allowed list
  *
- * @param mixed $action,... Controller action name or array of actions
+ * @param string|array $action,... Controller action name or array of actions
  * @return void
  * @see OAuthComponent::allow()
  */
 	public function deny($action = null) {
 		$args = func_get_args();
-		if (empty($args)) {
+		if (empty($args) || $action === null) {
 			$this->allowedActions = array();
 		} else {
 			if (isset($args[0]) && is_array($args[0])) {
