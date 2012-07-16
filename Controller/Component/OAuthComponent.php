@@ -366,7 +366,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
 				if (method_exists($e, 'sendHttpResponse')) {
 					$e->sendHttpResponse();
 				}
-				throw new $e;
+				throw $e;
 			}
 		}
 	}
