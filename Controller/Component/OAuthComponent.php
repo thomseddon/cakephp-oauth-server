@@ -19,6 +19,7 @@
 App::uses('Component', 'Controller');
 App::uses('Router', 'Routing');
 App::uses('Security', 'Utility');
+App::uses('Hash', 'Utility');
 App::uses('AuthComponent', 'Controller');
 
 App::import('Vendor', 'oauth2-php/lib/OAuth2');
@@ -176,7 +177,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
 		$methods = array_flip($controller->methods);
 		$action = $controller->request->params['action'];
 
-		$this->authenticate = Set::merge($this->_authDefaults, $this->authenticate);
+		$this->authenticate = Hash::merge($this->_authDefaults, $this->authenticate);
 		$this->User = ClassRegistry::init(array(
 		    'class' => $this->authenticate['userModel'],
 		    'alias' => $this->authenticate['userModel']
