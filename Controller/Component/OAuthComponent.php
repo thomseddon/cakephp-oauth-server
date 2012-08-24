@@ -173,9 +173,8 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  * @return boolean 
  */
 	public function startup(Controller $controller) {
-		$request = $controller->request;
 		$methods = array_flip($controller->methods);
-		$action = $request->params['action'];
+		$action = $controller->request->params['action'];
 
 		$this->authenticate = Set::merge($this->_authDefaults, $this->authenticate);
 		$this->User = ClassRegistry::init(array(
