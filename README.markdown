@@ -31,14 +31,14 @@ $ git submodule add git://github.com/seddonmedia/cakephp-oauth-server.git Plugin
 
 Load the plugin
 
-```
+```PHP
 CakePlugin::loadAll(); // Loads all plugins at once
 CakePlugin::load('OAuth'); //Just load OAuth
 ```
 
 And include the component in your controller:
 
-```
+```PHP
 $components = array('OAuth.OAuth');
 ```
 
@@ -71,7 +71,7 @@ $this->OAuth->authenticate = array(
 
 You can control what actions can be accessed using an OAuth access token in the same way you control access with the AuthComponent, so for example placing this in a controller's beforeFilter:
 
-```
+```PHP
 $this->OAuth->allow(array('userinfo', 'example'));
 ```
 Would allow access to the "userinfo" and "example" actions.
@@ -82,7 +82,7 @@ An OAuth client is an application that can access resources on behalf of resourc
 This plugin ships with all required models, including the "Clients" model for adding and accessing OAuth clients.
 You may wish to handle adding clients yourself, see the tables.sql for the schema, or you can use the convenience method included in the model, like so:
 
-```
+```PHP
 $client = $this->OAuth->Client->add('http://www.return_url.com')
 ```
 Which will generate then client_id and client_secret and return something like:
@@ -103,7 +103,7 @@ The method includes various schemes for generating client id's, [pick your favou
 ### Included Endpoints
 This plugin ships with an example controller that provides the necessary endpoints to generate access tokens. Routes are also included to give you sexy URL's like: "/oauth/token", you can fire them up by placing this in your bootstrap.php:
 
-```
+```PHP
 CakePlugin::loadAll(array(
     'OAuth' => array('routes' => true)
 ));
