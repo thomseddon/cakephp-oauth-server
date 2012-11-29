@@ -78,9 +78,9 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  * @var array 
  */
 	protected $_authDefaults = array(
-	    'userModel' => 'User',
-	    'fields' => array('username' => 'username', 'password' => 'password')
-	    );
+		'userModel' => 'User',
+		'fields' => array('username' => 'username', 'password' => 'password')
+		);
 
 /**
  * AuthCode object.
@@ -179,8 +179,8 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
 
 		$this->authenticate = Hash::merge($this->_authDefaults, $this->authenticate);
 		$this->User = ClassRegistry::init(array(
-		    'class' => $this->authenticate['userModel'],
-		    'alias' => $this->authenticate['userModel']
+			'class' => $this->authenticate['userModel'],
+			'alias' => $this->authenticate['userModel']
 			));
 
 		$isMissingAction = (
@@ -297,13 +297,13 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
 	public function user($field = null, $token = null) {
 		if (!$this->_user) {
 			$this->AccessToken->bindModel(array(
-			    'belongsTo' => array(
+				'belongsTo' => array(
 				'User' => array(
-				    'className' => $this->authenticate['userModel'],
-				    'foreignKey' => 'user_id'
-				    )
+					'className' => $this->authenticate['userModel'],
+					'foreignKey' => 'user_id'
+					)
 				)
-			    ));
+				));
 			$token = empty($token) ? $this->getBearerToken() : $token;
 			$data = $this->AccessToken->find('first', array(
 				'conditions' => array('oauth_token' => self::hash($token)),
@@ -403,8 +403,8 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
 			$conditions['client_secret'] = self::hash($client_secret);
 		}
 		$client = $this->Client->find('first', array(
-		    'conditions' => $conditions,
-		    'recursive' => -1
+			'conditions' => $conditions,
+			'recursive' => -1
 		));
 		if ($client){
 			return $client['Client'];
@@ -423,9 +423,9 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  */
 	public function getClientDetails($client_id) {
 		$client = $this->Client->find('first', array(
-		    'conditions' => array('client_id' => $client_id),
-		    'fields' => array('client_id', 'redirect_uri'),
-		    'recursive' => -1
+			'conditions' => array('client_id' => $client_id),
+			'fields' => array('client_id', 'redirect_uri'),
+			'recursive' => -1
 		));
 		if ($client) {
 			return $client['Client'];
@@ -444,8 +444,8 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  */
 	public function getAccessToken($oauth_token) {
 		$accessToken = $this->AccessToken->find('first', array(
-		    'conditions' => array('oauth_token' => self::hash($oauth_token)),
-		    'recursive' => -1,
+			'conditions' => array('oauth_token' => self::hash($oauth_token)),
+			'recursive' => -1,
 		));
 		if ($accessToken) {
 			return $accessToken['AccessToken'];
@@ -467,11 +467,11 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  */
 	public function setAccessToken($oauth_token, $client_id, $user_id, $expires, $scope = NULL) {
 		$data = array(
-		    'oauth_token' => $oauth_token,
-		    'client_id' => $client_id,
-		    'user_id' => $user_id,
-		    'expires' => $expires,
-		    'scope' => $scope
+			'oauth_token' => $oauth_token,
+			'client_id' => $client_id,
+			'user_id' => $user_id,
+			'expires' => $expires,
+			'scope' => $scope
 		);
 		$this->AccessToken->create();
 		return $this->AccessToken->save(array('AccessToken' => $data));
@@ -500,8 +500,8 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  */
 	public function getRefreshToken($refresh_token) {
 		$refreshToken = $this->RefreshToken->find('first', array(
-		    'conditions' => array('refresh_token' => self::hash($refresh_token)),
-		    'recursive' => -1
+			'conditions' => array('refresh_token' => self::hash($refresh_token)),
+			'recursive' => -1
 		));
 		if ($refreshToken) {
 			return $refreshToken['RefreshToken'];
@@ -524,11 +524,11 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  */
 	public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = NULL) {
 		$data = array(
-		    'refresh_token' => $refresh_token,
-		    'client_id' => $client_id,
-		    'user_id' => $user_id,
-		    'expires' => $expires,
-		    'scope' => $scope
+			'refresh_token' => $refresh_token,
+			'client_id' => $client_id,
+			'user_id' => $user_id,
+			'expires' => $expires,
+			'scope' => $scope
 		);
 		$this->RefreshToken->create();
 		return $this->RefreshToken->save(array('RefreshToken' => $data));
@@ -557,11 +557,11 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  */
 	public function checkUserCredentials($client_id, $username, $password) {
 		$user = $this->User->find('first', array(
-		   'conditions' => array(
-		       $this->authenticate['fields']['username'] => $username,
-		       $this->authenticate['fields']['password'] => AuthComponent::password($password)
+			'conditions' => array(
+				$this->authenticate['fields']['username'] => $username,
+				$this->authenticate['fields']['password'] => AuthComponent::password($password)
 			),
-		    'recursive' => -1
+			'recursive' => -1
 		));
 		if ($user) {
 			return array('user_id' => $user['User'][$this->User->primaryKey]);
@@ -579,8 +579,8 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  */
 	public function getAuthCode($code) {
 		$authCode = $this->AuthCode->find('first', array(
-		    'conditions' => array('code' => self::hash($code)),
-		    'recursive' => -1
+			'conditions' => array('code' => self::hash($code)),
+			'recursive' => -1
 		));
 		if ($authCode) {
 			return $authCode['AuthCode'];
@@ -603,12 +603,12 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  */
 	public function setAuthCode($code, $client_id, $user_id, $redirect_uri, $expires, $scope = NULL) {
 		$data = array(
-		    'code' => $code,
-		    'client_id' => $client_id,
-		    'user_id' => $user_id,
-		    'redirect_uri' => $redirect_uri,
-		    'expires' => $expires,
-		    'scope' => $scope
+			'code' => $code,
+			'client_id' => $client_id,
+			'user_id' => $user_id,
+			'redirect_uri' => $redirect_uri,
+			'expires' => $expires,
+			'scope' => $scope
 		);
 		$this->AuthCode->create();
 		return $this->AuthCode->save(array('AuthCode' => $data));
