@@ -3,42 +3,31 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>CakePHP OAuth Server/Provider by seddonmedia</title>
+    <title>CakePHP OAuth Server/Provider by thomseddon</title>
+
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/seddonmedia/cakephp-oauth-server">Fork On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/seddonmedia/cakephp-oauth-server/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/seddonmedia/cakephp-oauth-server/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
-
     <div class="wrapper">
+      <header>
+        <h1>CakePHP OAuth Server/Provider</h1>
+        <p>OAuth2 Server Plugin for CakePHP</p>
 
+        <p class="view"><a href="https://github.com/thomseddon/cakephp-oauth-server">View the Project on GitHub <small>thomseddon/cakephp-oauth-server</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/thomseddon/cakephp-oauth-server/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/thomseddon/cakephp-oauth-server/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/thomseddon/cakephp-oauth-server">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
       <section>
-        <div id="title">
-          <h1>CakePHP OAuth Server/Provider</h1>
-          <p>OAuth2 Server Plugin for CakePHP</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="http://twitter.com/thomseddon">Thom Seddon</a> at <a href="https://github.com/seddonmedia">Seddon Media</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
-        </div>
-
         <h1>CakePHP OAuth2 Server Plugin</h1>
 
 <p>This is a plugin for implementing an OAuth Server/Provider in CakePHP, built on quizlets <a href="https://github.com/quizlet/oauth2-php">oauth2-php library</a></p>
@@ -73,14 +62,14 @@
 
 <p>Load the plugin</p>
 
-<pre><code>CakePlugin::loadAll(); // Loads all plugins at once
-CakePlugin::load('OAuth'); //Just load OAuth
-</code></pre>
+<div class="highlight"><pre><span class="nx">CakePlugin</span><span class="o">::</span><span class="na">loadAll</span><span class="p">();</span> <span class="c1">// Loads all plugins at once</span>
+<span class="nx">CakePlugin</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">'OAuth'</span><span class="p">);</span> <span class="c1">//Just load OAuth</span>
+</pre></div>
 
 <p>And include the component in your controller:</p>
 
-<pre><code>$components = array('OAuth.OAuth');
-</code></pre>
+<div class="highlight"><pre><span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'OAuth.OAuth'</span><span class="p">);</span>
+</pre></div>
 
 <h2>Getting Started</h2>
 
@@ -103,21 +92,18 @@ For reference, this plugin currently supports the following grant types:</p>
 
 <p>To use the "Resource Owner Password Credentials Grant" you need to configure the plugin so it knows where to look for your users username/password combinations. By default it will try a "Users" model with "username" and "password" fields, you can change this in your controllers beforeFilter like so:</p>
 
-<div class="highlight">
-<pre><span class="x">$this-&gt;OAuth-&gt;authenticate = array(</span>
-<span class="x">    'userModel' =&gt; 'Members',</span>
-<span class="x">    'fields' =&gt; array(</span>
-<span class="x">        'username' =&gt; 'email'</span>
-<span class="x">    )</span>
-<span class="x">);</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">OAuth</span><span class="o">-&gt;</span><span class="na">authenticate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'userModel'</span> <span class="o">=&gt;</span> <span class="s1">'Members'</span><span class="p">,</span>
+    <span class="s1">'fields'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'email'</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
 
 <p>You can control what actions can be accessed using an OAuth access token in the same way you control access with the AuthComponent, so for example placing this in a controller's beforeFilter:</p>
 
-<pre><code>$this-&gt;OAuth-&gt;allow(array('userinfo', 'example'));
-</code></pre>
+<div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">OAuth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'userinfo'</span><span class="p">,</span> <span class="s1">'example'</span><span class="p">));</span>
+</pre></div>
 
 <p>Would allow access to the "userinfo" and "example" actions.</p>
 
@@ -128,15 +114,15 @@ For reference, this plugin currently supports the following grant types:</p>
 <p>This plugin ships with all required models, including the "Clients" model for adding and accessing OAuth clients.
 You may wish to handle adding clients yourself, see the tables.sql for the schema, or you can use the convenience method included in the model, like so:</p>
 
-<pre><code>$client = $this-&gt;OAuth-&gt;Client-&gt;add('<a href="http://www.return_url.com'">http://www.return_url.com'</a>)
-</code></pre>
+<div class="highlight"><pre><span class="nv">$client</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">OAuth</span><span class="o">-&gt;</span><span class="na">Client</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">'http://www.return_url.com'</span><span class="p">)</span>
+</pre></div>
 
 <p>Which will generate then client_id and client_secret and return something like:</p>
 
 <pre><code>Array(
     [client_id] =&gt; NGYcZDRjODcxYzFkY2Rk
     [client_secret] =&gt; 8e7ff3208eed06d101bf3da2473fc92ac1c6d2e7
-    [redirect_uri] =&gt; <a href="http://www.return_url.com">http://www.return_url.com</a>
+    [redirect_uri] =&gt; http://www.return_url.com
 )
 </code></pre>
 
@@ -148,10 +134,10 @@ You may wish to handle adding clients yourself, see the tables.sql for the schem
 
 <p>This plugin ships with an example controller that provides the necessary endpoints to generate access tokens. Routes are also included to give you sexy URL's like: "/oauth/token", you can fire them up by placing this in your bootstrap.php:</p>
 
-<pre><code>CakePlugin::loadAll(array(
-    'OAuth' =&gt; array('routes' =&gt; true)
-));
-</code></pre>
+<div class="highlight"><pre><span class="nx">CakePlugin</span><span class="o">::</span><span class="na">loadAll</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'OAuth'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'routes'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
 
 <p>As an example, once you have registered a client, you could then use the Authorization Code Grant like so:</p>
 
@@ -177,16 +163,19 @@ You may wish to handle adding clients yourself, see the tables.sql for the schem
 </li>
 </ol><p>There is quite a bit of documentation through the code, so dive in, get your hands dirty and submit any issues here!</p>
       </section>
-
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/thomseddon">thomseddon</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    <script src="javascripts/scale.fix.js"></script>
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
           <script type="text/javascript">
             try {
-              var pageTracker = _gat._getTracker("UA-17516578-11");
+              var pageTracker = _gat._getTracker("17516578");
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
