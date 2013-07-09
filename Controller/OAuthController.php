@@ -13,9 +13,8 @@
 App::uses('OAuthAppController', 'OAuth.Controller');
 
 /**
- * Clients Controller
+ * OAuthController
  *
- * @property Client $Client
  */
 class OAuthController extends OAuthAppController {
 
