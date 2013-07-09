@@ -48,8 +48,7 @@ class OAuthController extends OAuthAppController {
  *	- redirect_url
  *
  */
-	public function authorize () {
-
+	public function authorize() {
 		if (!$this->Auth->loggedIn()) {
 			$this->redirect(array('action' => 'login', '?' => $this->request->query));
 		}
@@ -81,7 +80,7 @@ class OAuthController extends OAuthAppController {
 				$this->Session->delete('OAuth.params');
 		} else {
 			try {
-				$OAuthParams =  $this->OAuth->getAuthorizeParams();
+				$OAuthParams = $this->OAuth->getAuthorizeParams();
 			} catch (Exception $e){
 				$e->sendHttpResponse();
 			}
@@ -118,7 +117,6 @@ class OAuthController extends OAuthAppController {
 		$this->set(compact('OAuthParams'));
 	}
 
-
 /**
  * Example Token Endpoint - this is where clients can retrieve an access token
  *
@@ -140,14 +138,13 @@ class OAuthController extends OAuthAppController {
  *	- client_secret
  *
  */
-	public function token(){
+	public function token() {
 		$this->autoRender = false;
 		try {
 			$this->OAuth->grantAccessToken();
 		} catch (OAuth2ServerException $e) {
 			$e->sendHttpResponse();
 		}
-
 	}
 
 /**

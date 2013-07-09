@@ -139,7 +139,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  *
  * @see OAuth2::__construct().
  */
-	public function __construct(ComponentCollection $collection, $settings = array()){
+	public function __construct(ComponentCollection $collection, $settings = array()) {
 		parent::__construct($collection, $settings);
 		$this->OAuth2 = new OAuth2($this);
 		$this->AccessToken = ClassRegistry::init(array('class' => 'OAuth.AccessToken', 'alias' => 'AccessToken'));
@@ -368,6 +368,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  * @param string $name
  * @param mixed $arguments
  * @return mixed
+ * @throws Exception
  */
 	public function __call($name, $arguments) {
 		if (method_exists($this->OAuth2, $name)) {
@@ -396,7 +397,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  * @param string $client_secret
  * @return mixed array of client credentials if valid, false if not
  */
-	public function checkClientCredentials($client_id, $client_secret = NULL) {
+	public function checkClientCredentials($client_id, $client_secret = null) {
 		$conditions = array('client_id' => $client_id);
 		if ($client_secret) {
 			$conditions['client_secret'] = self::hash($client_secret);
@@ -405,12 +406,11 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
 			'conditions' => $conditions,
 			'recursive' => -1
 		));
-		if ($client){
+		if ($client) {
 			return $client['Client'];
 		};
 		return false;
 	}
-
 
 /**
  * Get client details
@@ -431,7 +431,6 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
 		}
 		return false;
 	}
-
 
 /**
  * Retrieve access token
@@ -464,7 +463,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  * @param string $scope
  * @return boolean true if successfull, false if failed
  */
-	public function setAccessToken($oauth_token, $client_id, $user_id, $expires, $scope = NULL) {
+	public function setAccessToken($oauth_token, $client_id, $user_id, $expires, $scope = null) {
 		$data = array(
 			'oauth_token' => $oauth_token,
 			'client_id' => $client_id,
@@ -508,7 +507,6 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
 		return null;
 	}
 
-
 /**
  * Grant type: refresh_token
  *
@@ -521,7 +519,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  * @param string $scope
  * @return boolean true if successfull, false if fail
  */
-	public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = NULL) {
+	public function setRefreshToken($refresh_token, $client_id, $user_id, $expires, $scope = null) {
 		$data = array(
 			'refresh_token' => $refresh_token,
 			'client_id' => $client_id,
@@ -600,7 +598,7 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
  * @param string $scope
  * @return boolean true if successfull, otherwise false
  */
-	public function setAuthCode($code, $client_id, $user_id, $redirect_uri, $expires, $scope = NULL) {
+	public function setAuthCode($code, $client_id, $user_id, $redirect_uri, $expires, $scope = null) {
 		$data = array(
 			'code' => $code,
 			'client_id' => $client_id,
