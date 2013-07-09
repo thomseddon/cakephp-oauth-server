@@ -1,5 +1,7 @@
 <?php
+
 App::uses('OAuthAppModel', 'OAuth.Model');
+
 /**
  * AuthCode Model
  *
@@ -7,18 +9,21 @@ App::uses('OAuthAppModel', 'OAuth.Model');
  * @property User $User
  */
 class AuthCode extends OAuthAppModel {
+
 /**
  * Primary key field
  *
  * @var string
  */
 	public $primaryKey = 'code';
+
 /**
  * Display field
  *
  * @var string
  */
 	public $displayField = 'code';
+
 /**
  * Validation rules
  *
@@ -79,11 +84,12 @@ class AuthCode extends OAuthAppModel {
 
 /**
  * beforeSave method to hash codes before saving
- * 
- * @return boolean 
+ *
+ * @return boolean
  */
 	public function beforeSave($options = array()) {
 		$this->data['AuthCode']['code'] = OAuthComponent::hash($this->data['AuthCode']['code']);
 		return true;
 	}
+
 }
