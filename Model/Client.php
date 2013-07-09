@@ -12,12 +12,14 @@ App::uses('Security', 'Utility');
  * @property RefreshToken $RefreshToken
  */
 class Client extends OAuthAppModel {
+
 /**
  * Primary key field
  *
  * @var string
  */
 	public $primaryKey = 'client_id';
+
 /**
  * Display field
  *
@@ -27,9 +29,9 @@ class Client extends OAuthAppModel {
 
 /**
  * Secret to distribute when using addClient
- * 
- * @var type 
- */	
+ *
+ * @var type
+ */
 	protected $addClientSecret = false;
 
 /**
@@ -102,9 +104,9 @@ class Client extends OAuthAppModel {
 
 /**
  * AddClient
- * 
+ *
  * Convinience function for adding client, will create a uuid client_id and random secret
- * 
+ *
  * @param mixed $data Either an array (e.g. $controller->request->data) or string redirect_uri
  * @return booleen Success of failure
  */
@@ -113,7 +115,7 @@ class Client extends OAuthAppModel {
 
 		if (is_array($data) && is_array($data['Client']) && array_key_exists('redirect_uri', $data['Client'])) {
 			$this->data['Client']['redirect_uri'] = $data['Client']['redirect_uri'];
-		} elseif (is_string($data)){
+		} elseif (is_string($data)) {
 			$this->data['Client']['redirect_uri'] = $data;
 		} else {
 			return false;
@@ -146,13 +148,12 @@ class Client extends OAuthAppModel {
 		}
 		return OAuthComponent::hash($str);
 	}
-	
 
 	public function beforeSave($options = array()) {
 		$this->data['Client']['client_secret'] = OAuthComponent::hash($this->data['Client']['client_secret']);
 		return true;
 	}
-	
+
 	public function afterSave($created) {
 		if ($this->addClientSecret) {
 			$this->data['Client']['client_secret'] = $this->addClientSecret;

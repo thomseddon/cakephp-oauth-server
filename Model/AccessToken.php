@@ -1,5 +1,7 @@
 <?php
+
 App::uses('OAuthAppModel', 'OAuth.Model');
+
 /**
  * AccessToken Model
  *
@@ -7,18 +9,21 @@ App::uses('OAuthAppModel', 'OAuth.Model');
  * @property User $User
  */
 class AccessToken extends OAuthAppModel {
+
 /**
  * Primary key field
  *
  * @var string
  */
 	public $primaryKey = 'oauth_token';
+
 /**
  * Display field
  *
  * @var string
  */
 	public $displayField = 'oauth_token';
+
 /**
  * Validation rules
  *
@@ -67,11 +72,12 @@ class AccessToken extends OAuthAppModel {
 
 /**
  * beforeSave method to hash tokens before saving
- * 
- * @return boolean 
+ *
+ * @return boolean
  */
 	public function beforeSave($options = array()) {
 		$this->data['AccessToken']['oauth_token'] = OAuthComponent::hash($this->data['AccessToken']['oauth_token']);
 		return true;
 	}
+
 }

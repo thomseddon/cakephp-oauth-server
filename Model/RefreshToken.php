@@ -1,5 +1,7 @@
 <?php
+
 App::uses('OAuthAppModel', 'OAuth.Model');
+
 /**
  * RefreshToken Model
  *
@@ -7,18 +9,21 @@ App::uses('OAuthAppModel', 'OAuth.Model');
  * @property User $User
  */
 class RefreshToken extends OAuthAppModel {
+
 /**
  * Primary key field
  *
  * @var string
  */
 	public $primaryKey = 'refresh_token';
+
 /**
  * Display field
  *
  * @var string
  */
 	public $displayField = 'refresh_token';
+
 /**
  * Validation rules
  *
@@ -67,11 +72,12 @@ class RefreshToken extends OAuthAppModel {
 
 /**
  * beforeSave method to hash tokens before saving
- * 
- * @return boolean 
+ *
+ * @return boolean
  */
 	public function beforeSave($options = array()) {
 		$this->data['RefreshToken']['refresh_token'] = OAuthComponent::hash($this->data['RefreshToken']['refresh_token']);
 		return true;
 	}
+
 }
