@@ -1,6 +1,7 @@
 <?php
 
 App::uses('OAuthAppModel', 'OAuth.Model');
+App::uses('OAuthComponent', 'OAuth.Controller/Component');
 App::uses('String', 'Utility');
 App::uses('Security', 'Utility');
 
