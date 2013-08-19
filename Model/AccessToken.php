@@ -55,6 +55,12 @@ class AccessToken extends OAuthAppModel {
 		),
 	);
 
+	public $actsAs = array(
+		'OAuth.HashedField' => array(
+			'fields' => 'oauth_token',
+		),
+	);
+
 /**
  * belongsTo associations
  *
@@ -69,15 +75,5 @@ class AccessToken extends OAuthAppModel {
 			'order' => ''
 		)
 	);
-
-/**
- * beforeSave method to hash tokens before saving
- *
- * @return boolean
- */
-	public function beforeSave($options = array()) {
-		$this->data['AccessToken']['oauth_token'] = OAuthComponent::hash($this->data['AccessToken']['oauth_token']);
-		return true;
-	}
 
 }

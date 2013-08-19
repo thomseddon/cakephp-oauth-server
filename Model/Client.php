@@ -1,9 +1,7 @@
 <?php
 
 App::uses('OAuthAppModel', 'OAuth.Model');
-App::uses('OAuthComponent', 'OAuth.Controller/Component');
 App::uses('String', 'Utility');
-App::uses('Security', 'Utility');
 
 /**
  * Client Model
@@ -52,6 +50,14 @@ class Client extends OAuthAppModel {
 		'redirect_uri' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+			),
+		),
+	);
+
+	public $actsAs = array(
+		'OAuth.HashedField' => array(
+			'fields' => array(
+				'client_secret'
 			),
 		),
 	);
@@ -121,7 +127,7 @@ class Client extends OAuthAppModel {
 		} else {
 			return false;
 		}
-		
+
 		/**
 		 * in case you have additional fields in the clients table such as name, description etc
 		 * and you are using $data['Client']['name'], etc to save
@@ -156,11 +162,6 @@ class Client extends OAuthAppModel {
 			$str .= $chars[mt_rand(0, $count - 1)];
 		}
 		return OAuthComponent::hash($str);
-	}
-
-	public function beforeSave($options = array()) {
-		$this->data['Client']['client_secret'] = OAuthComponent::hash($this->data['Client']['client_secret']);
-		return true;
 	}
 
 	public function afterSave($created) {

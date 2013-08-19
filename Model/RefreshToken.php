@@ -55,6 +55,12 @@ class RefreshToken extends OAuthAppModel {
 		),
 	);
 
+	public $actsAs = array(
+		'OAuth.HashedField' => array(
+			'fields' => 'refresh_token',
+		),
+	);
+
 /**
  * belongsTo associations
  *
@@ -69,15 +75,5 @@ class RefreshToken extends OAuthAppModel {
 			'order' => ''
 		)
 	);
-
-/**
- * beforeSave method to hash tokens before saving
- *
- * @return boolean
- */
-	public function beforeSave($options = array()) {
-		$this->data['RefreshToken']['refresh_token'] = OAuthComponent::hash($this->data['RefreshToken']['refresh_token']);
-		return true;
-	}
 
 }

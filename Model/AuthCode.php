@@ -60,6 +60,12 @@ class AuthCode extends OAuthAppModel {
 		),
 	);
 
+	public $actsAs = array(
+		'OAuth.HashedField' => array(
+			'fields' => 'code',
+		),
+	);
+
 /**
  * belongsTo associations
  *
@@ -81,15 +87,5 @@ class AuthCode extends OAuthAppModel {
 			'order' => ''
 		)
 	);
-
-/**
- * beforeSave method to hash codes before saving
- *
- * @return boolean
- */
-	public function beforeSave($options = array()) {
-		$this->data['AuthCode']['code'] = OAuthComponent::hash($this->data['AuthCode']['code']);
-		return true;
-	}
 
 }
