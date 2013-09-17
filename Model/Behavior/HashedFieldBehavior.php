@@ -26,7 +26,7 @@ class HashedFieldBehavior extends ModelBehavior {
 /**
  * Hash field when present in model data (POSTed data)
  */
-	public function beforeSave(Model $Model) {
+	public function beforeSave(Model $Model, $options = array()) {
 		$setting = $this->settings[$Model->name];
 		foreach ((array) $setting['fields'] as $field) {
 			if (array_key_exists($field, $Model->data[$Model->alias])) {

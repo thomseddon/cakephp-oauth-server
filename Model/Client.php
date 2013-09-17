@@ -164,7 +164,7 @@ class Client extends OAuthAppModel {
 		return OAuthComponent::hash($str);
 	}
 
-	public function afterSave($created) {
+	public function afterSave($created, $options = array()) {
 		if ($this->addClientSecret) {
 			$this->data['Client']['client_secret'] = $this->addClientSecret;
 		}
