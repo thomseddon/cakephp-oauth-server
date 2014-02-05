@@ -1,0 +1,36 @@
+{
+	"name" : "thomseddon/cakephp-oauth-server",
+	"description" : "CakePHP OAuth2 Server Plugin",
+	"type" : "cakephp-plugin",
+	"authors" : [{
+			"name" : "Thom Seddon",
+			"homepage" : "http://www.thomseddon.co.uk/",
+			"role" : "Author"
+		}, {
+			"name" : "CakePHP Community",
+			"homepage" : "https://github.com/thomseddon/cakephp-oauth-server/graphs/contributors"
+		}
+	],
+	"keywords" : [
+		"cakephp",
+		"oauth",
+		"server"
+	],
+	"homepage" : "https://github.com/thomseddon/cakephp-oauth-server",
+	"license" : [
+		"MIT"
+	],
+	"require" : {
+		"composer/installers" : "*",
+		"php" : ">=5.3.0"
+	},
+	"support" : {
+		"forum" : "http://stackoverflow.com/tags/cakephp",
+		"source" : "https://github.com/thomseddon/cakephp-oauth-server",
+		"issues" : "https://github.com/thomseddon/cakephp-oauth-serverissues",
+		"irc" : "irc://irc.freenode.org/cakephp"
+	},
+	"extra" : {
+		"installer-name" : "OAuth"
+	}
+}
