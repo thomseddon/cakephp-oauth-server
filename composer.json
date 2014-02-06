@@ -22,7 +22,8 @@
   ],
   "require" : {
     "composer/installers" : "*",
-    "php" : ">=5.3.0"
+    "php" : ">=5.3.0",
+    "thomseddon/oauth2-php": "dev-master"
   },
   "support" : {
     "forum" : "http://stackoverflow.com/tags/cakephp",
