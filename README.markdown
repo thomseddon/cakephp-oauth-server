@@ -36,7 +36,7 @@ Go to Config/Schema/schema.sql to grab the tables
 **OR**
 
 ```
-$ cake Migrations.migration all --plugin OAuth
+$ cake Migrations.migration run all --plugin OAuth
 ```
 
 ### Cloning
