@@ -1,3 +1,8 @@
+# This project is unmaintained, see https://github.com/uafrica/oauth-server as an alternative
+
+
+----
+
 # CakePHP OAuth2 Server Plugin
 
 This is a plugin for implementing an OAuth Server/Provider in CakePHP, built on quizlets [oauth2-php library][1]
