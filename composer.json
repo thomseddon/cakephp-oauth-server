@@ -25,6 +25,7 @@
     "php" : ">=5.3.0",
     "thomseddon/oauth2-php": "dev-master"
   },
+  "abandoned": true,
   "support" : {
     "forum" : "http://stackoverflow.com/tags/cakephp",
     "source" : "https://github.com/thomseddon/cakephp-oauth-server",
